@@ -27,18 +27,30 @@ import kata4.view.MailListReader;
 // 9 método dataSet()  se reemplazan todos los métodos addValue por uno solo dentro un bucle
 // 10, 11, 12 CLASE Kata4  se instancia un objeto Histogram y sobre este objeto se llama al método increment(). Se invoca al método execute()
 public class Kata4 {
-
+    private static String filename = "email.txt";
+    private static List<Mail> mailList = new ArrayList<Mail>();
+    private static Histogram<String> histogram = new Histogram<String>();
+    private static HistogramDisplay histoDisplay;
+    
     public static void main(String[] args) {
-        String filename = "email.txt";
-        List<Mail> mailList = new ArrayList<Mail>();
-        Histogram<String> histogram = new Histogram<String>();
-        HistogramDisplay histoDisplay;
-        
-        mailList = MailListReader.read("email.txt");
-        histogram = MailHistogramBuilder.build(mailList);
-        new HistogramDisplay(histogram).execute();
-        
-        
+        execute();
     }
+    private static void execute() {
+        input();
+        process();
+        output();
+    }
+    private static void input() {
+        mailList = MailListReader.read(filename);
+    }
+    private static void process() {
+        histogram = MailHistogramBuilder.build(mailList);
+    }
+
+    private static void output() {
+        new HistogramDisplay(histogram).execute();
+    }
+
+    
     
 }
